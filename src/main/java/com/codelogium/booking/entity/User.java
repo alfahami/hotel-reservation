@@ -1,5 +1,47 @@
 package com.codelogium.booking.entity;
 
 public class User {
-    
+    String id;
+    String fullName;
+    String passportNumber;
+    int balance;
+
+    public User(String id, String fullName, String passportNumber, int balance) {
+        this.id = id;
+        this.fullName = fullName;
+        this.passportNumber = passportNumber;
+        this.balance = balance;
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getFullName() {
+        return this.fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getPassportNumber() {
+        return this.passportNumber;
+    }
+
+    public void setPassportNumber(String passportNumber) {
+        this.passportNumber = passportNumber;
+    }
+
+    public int getBalance() {
+        return this.balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
 }

@@ -1,7 +1,7 @@
 package com.codelogium.booking.entity;
 
 public class User {
-    String id;
+    int id;
     String fullName;
     String passportNumber;
     int balance;
@@ -13,6 +13,7 @@ public class User {
         this.balance = balance;
     }
 
+    // copy constructor
     public User(User source) {
         this.id = source.id;
         this.fullName = source.fullName;
@@ -20,7 +21,7 @@ public class User {
         this.balance = source.balance;
     }
 
-    public String getId() {
+    public int getId() {
         return this.id;
     }
 

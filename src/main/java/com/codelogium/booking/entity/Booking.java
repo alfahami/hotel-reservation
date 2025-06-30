@@ -7,16 +7,16 @@ public class Booking {
     
     User user;
     Room room;
-    LocalDate checkin;
-    LocalDate checkout;
+    LocalDate checkIn;
+    LocalDate checkOut;
     int duration; // to be automatically calculated
 
 
-    public Booking(User user, Room room, LocalDate checkin, LocalDate checkout, int duration) {
+    public Booking(User user, Room room, LocalDate checkIn, LocalDate checkOut, int duration) {
         this.user = user;
         this.room = room;
-        this.checkin = checkin;
-        this.checkout = checkout;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
         setDuration(duration); // implicity calling stayDuration in order to get the number of nights   
     }
 
@@ -36,20 +36,20 @@ public class Booking {
         this.room = room;
     }
 
-    public LocalDate getCheckin() {
-        return this.checkin;
+    public LocalDate getCheckIn() {
+        return this.checkIn;
     }
 
-    public void setCheckin(LocalDate checkin) {
-        this.checkin = checkin;
+    public void setCheckIn(LocalDate checkIn) {
+        this.checkIn = checkIn;
     }
 
-    public LocalDate getCheckout() {
-        return this.checkout;
+    public LocalDate getCheckOut() {
+        return this.checkOut;
     }
 
-    public void setCheckout(LocalDate checkout) {
-        this.checkout = checkout;
+    public void setCheckOut(LocalDate checkOut) {
+        this.checkOut = checkOut;
     }
 
     public int getDuration() {
@@ -57,11 +57,11 @@ public class Booking {
     }
 
     public void setDuration(int duration) {
-        this.duration = stayDuration(checkin, checkout);
+        this.duration = stayDuration(checkIn, checkOut);
     }
 
     // Calculate automatically the number of nights
-    private int stayDuration(LocalDate checkin, LocalDate checkout) {
-        return Period.between(checkin, checkout).getDays();
+    private int stayDuration(LocalDate checkIn, LocalDate checkOut) {
+        return Period.between(checkIn, checkOut).getDays();
     }
 }

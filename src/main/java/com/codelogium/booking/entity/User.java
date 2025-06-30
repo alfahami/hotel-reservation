@@ -13,6 +13,13 @@ public class User {
         this.balance = balance;
     }
 
+    public User(User source) {
+        this.id = source.id;
+        this.fullName = source.fullName;
+        this.passportNumber = source.passportNumber;
+        this.balance = source.balance;
+    }
+
     public String getId() {
         return this.id;
     }

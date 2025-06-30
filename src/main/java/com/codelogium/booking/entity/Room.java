@@ -14,6 +14,12 @@ public class Room {
         this.rate = rate;
     }
 
+    public Room Room(Room source) {
+        this.id = source.id;
+        this.type = source.type;
+        this.rate = source.rate;
+    }
+
     public String getId() {
         return this.id;
     }

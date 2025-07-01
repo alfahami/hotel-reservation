@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import com.codelogium.booking.constants.RoomType;
 import com.codelogium.booking.entity.Room;
+import com.codelogium.booking.entity.User;
 import com.codelogium.booking.repository.BookingRepository;
 import com.codelogium.booking.repository.RoomRepository;
 import com.codelogium.booking.repository.UserRepository;
@@ -43,8 +44,11 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public void bookRoom(int userId, int roomNumber, LocalDate checkIn, LocalDate checkOut) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'bookRoom'");
+        User user = userRepository.retrieveUser(userId);
+        Room room = roomRepository.findRoomByNumber(roomNumber);
+        if(user != null) {
+
+        }
     }
 
     @Override
@@ -55,8 +59,16 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public void setUser(int userId, int balance) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setUser'");
+        User user = userRepository.retrieveUser(userId);
+        if(user != null) {
+            user.setBalance(balance);
+            userRepository.updateUser(userId, user);
+        } 
+        else {
+            // Create the user if not found
+            User newUser = new User(userId, null, null, balance);
+            userRepository.createUser(newUser);
+        }
     }
 
     @Override

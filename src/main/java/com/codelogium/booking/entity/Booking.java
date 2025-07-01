@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.Period;
 
 public class Booking {
-    
+    String bookingNumber;
     User user;
     Room room;
     LocalDate checkIn;
@@ -12,12 +12,30 @@ public class Booking {
     int duration; // to be automatically calculated
 
 
-    public Booking(User user, Room room, LocalDate checkIn, LocalDate checkOut, int duration) {
+    public Booking(String bookingNumber, User user, Room room, LocalDate checkIn, LocalDate checkOut, int duration) {
+        this.bookingNumber = bookingNumber;
         this.user = user;
         this.room = room;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         setDuration(duration); // implicity calling stayDuration in order to get the number of nights   
+    }
+
+    public Booking(Booking source) {
+        this.bookingNumber = source.bookingNumber;
+        this.user = source.getUser();
+        this.room = source.getRoom();
+        this.checkIn = source.getCheckIn();
+        this.checkOut = source.getCheckOut();
+        this.duration = source.getDuration(); // implicity calling stayDuration in order to get the number of nights   
+    }
+
+    public String getBookingNumber() {
+        return this.bookingNumber;
+    }
+
+    public void setBookingNumber(String bookingNumber) {
+        this.bookingNumber = bookingNumber;
     }
 
     public User getUser() {

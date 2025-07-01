@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import com.codelogium.booking.constants.RoomType;
 import com.codelogium.booking.entity.Room;
+import com.codelogium.booking.repository.BookingRepository;
 import com.codelogium.booking.repository.RoomRepository;
 import com.codelogium.booking.repository.UserRepository;
 
@@ -11,6 +12,13 @@ public class BookingServiceImpl implements BookingService {
     
     private UserRepository userRepository;
     private RoomRepository roomRepository;
+    private BookingRepository bookingRepository;
+
+    public BookingServiceImpl(UserRepository userRepository, RoomRepository roomRepository, BookingRepository bookingRepository) {
+        this.userRepository = userRepository;
+        this.roomRepository = roomRepository;
+        this.bookingRepository = bookingRepository;
+    }
 
     @Override
     public void setRoom(int roomNumber, RoomType roomType, int rate) {
@@ -23,6 +31,13 @@ public class BookingServiceImpl implements BookingService {
 
             // save the updated room in the arraylist
             roomRepository.updateRoom(roomNumber, room);
+        }
+        else {
+            // if the room doesn't exist we create it
+            Room newRoom = new Room(roomNumber, roomType, rate); //TODO: handle Exception when the type is not correct
+
+            // update room list
+            roomRepository.createRoom(newRoom); 
         }
     }
 

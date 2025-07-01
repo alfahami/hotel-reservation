@@ -9,8 +9,8 @@ public class Room {
     int rate;
 
 
-    public Room(String id, int roomNumber, RoomType type, int rate) {
-        this.id = id;
+    public Room(int roomNumber, RoomType type, int rate) {
+        this.id = "Room" + roomNumber;
         this.roomNumber = roomNumber;
         this.type = type;
         this.rate = rate;

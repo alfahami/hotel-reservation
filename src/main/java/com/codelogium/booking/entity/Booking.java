@@ -12,8 +12,7 @@ public class Booking {
     int duration; // to be automatically calculated
 
 
-    public Booking(String bookingNumber, User user, Room room, LocalDate checkIn, LocalDate checkOut, int duration) {
-        this.bookingNumber = bookingNumber;
+    public Booking(User user, Room room, LocalDate checkIn, LocalDate checkOut) {
         this.user = user;
         this.room = room;
         this.checkIn = checkIn;

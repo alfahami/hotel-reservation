@@ -3,6 +3,7 @@ package com.codelogium.booking.service;
 import java.time.LocalDate;
 
 import com.codelogium.booking.constants.RoomType;
+import com.codelogium.booking.entity.Booking;
 import com.codelogium.booking.entity.Room;
 import com.codelogium.booking.entity.User;
 import com.codelogium.booking.repository.BookingRepository;
@@ -46,9 +47,9 @@ public class BookingServiceImpl implements BookingService {
     public void bookRoom(int userId, int roomNumber, LocalDate checkIn, LocalDate checkOut) {
         User user = userRepository.retrieveUser(userId);
         Room room = roomRepository.findRoomByNumber(roomNumber);
-        if(user != null) {
 
-        }
+        Booking newBooking = new Booking(user, room, checkIn, checkOut);
+        bookingRepository.createBooking(newBooking); 
     }
 
     @Override

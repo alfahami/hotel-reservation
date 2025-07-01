@@ -9,6 +9,7 @@ public class BookingRepository {
     private ArrayList<Booking> datastore = new ArrayList<>();
 
     public Boolean createBooking(Booking booking) {
+        booking.setBookingNumber("Booking" + this.datastore.size()+ 1);
         return this.datastore.add(booking);
     }
 

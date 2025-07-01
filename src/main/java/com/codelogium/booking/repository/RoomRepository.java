@@ -6,18 +6,18 @@ import com.codelogium.booking.entity.Room;
 
 public class RoomRepository {
     
-    private ArrayLis<Room> datastore = new ArrayList<>();
+    private ArrayList<Room> datastore = new ArrayList<>();
 
     public Boolean createRoom(Room room) {
         return this.datastore.add(room);
     }
 
-    public retrieveRoom(String id) {
+    public Room retrieveRoom(String id) {
         return findRoom(id);
     }
 
     public Boolean removeRoom(String id) {
-        return datastore.reomve(findRoom(id));
+        return datastore.remove(findRoom(id));
     }
 
     private Room findRoom(String id) {

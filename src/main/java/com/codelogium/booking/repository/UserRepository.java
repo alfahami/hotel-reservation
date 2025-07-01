@@ -12,13 +12,13 @@ public class UserRepository {
         return this.datastore.add(user);
     }
 
-    public User retrieveUser(String id) {
-
+    public User retrieveUser(int id) {
+        return new User(findUser(id));
     }
 
-    private User findUser(String id) {
+    private User findUser(int id) {
         for (User user : datastore) {
-            if(user.getId().equals(id)) return new User(user);
+            if(user.getId() == id) return new User(user);
         }
 
         return null; // TODO: custom Exception

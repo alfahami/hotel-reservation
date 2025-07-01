@@ -6,7 +6,7 @@ public class User {
     String passportNumber;
     int balance;
 
-    public User(String id, String fullName, String passportNumber, int balance) {
+    public User(int id, String fullName, String passportNumber, int balance) {
         this.id = id;
         this.fullName = fullName;
         this.passportNumber = passportNumber;
@@ -25,7 +25,7 @@ public class User {
         return this.id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

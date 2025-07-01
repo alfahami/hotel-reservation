@@ -15,10 +15,10 @@ public class User {
 
     // copy constructor
     public User(User source) {
-        this.id = source.id;
-        this.fullName = source.fullName;
-        this.passportNumber = source.passportNumber;
-        this.balance = source.balance;
+        this.id = source.getId();
+        this.fullName = source.getFullName();
+        this.passportNumber = source.getPassportNumber();
+        this.balance = source.getBalance();
     }
 
     public int getId() {

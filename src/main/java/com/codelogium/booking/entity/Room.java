@@ -18,10 +18,10 @@ public class Room {
 
     // copy constructor
     public Room(Room source) {
-        this.id = source.id;
-        this.roomNumber = source.roomNumber;
-        this.type = source.type;
-        this.rate = source.rate;
+        this.id = source.getId();
+        this.roomNumber = source.getRoomNumber();
+        this.type = source.getType();
+        this.rate = source.getRate();
     }
 
     public String getId() {

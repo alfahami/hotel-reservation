@@ -78,7 +78,7 @@ public class Booking {
     }
 
     // Calculate automatically the number of nights
-    private int stayDuration(LocalDate checkIn, LocalDate checkOut) {
+    public static int stayDuration(LocalDate checkIn, LocalDate checkOut) {
         return Period.between(checkIn, checkOut).getDays();
     }
 }

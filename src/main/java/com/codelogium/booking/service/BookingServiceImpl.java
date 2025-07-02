@@ -11,12 +11,13 @@ import com.codelogium.booking.repository.RoomRepository;
 import com.codelogium.booking.repository.UserRepository;
 
 public class BookingServiceImpl implements BookingService {
-    
+
     private UserRepository userRepository;
     private RoomRepository roomRepository;
     private BookingRepository bookingRepository;
 
-    public BookingServiceImpl(UserRepository userRepository, RoomRepository roomRepository, BookingRepository bookingRepository) {
+    public BookingServiceImpl(UserRepository userRepository, RoomRepository roomRepository,
+            BookingRepository bookingRepository) {
         this.userRepository = userRepository;
         this.roomRepository = roomRepository;
         this.bookingRepository = bookingRepository;
@@ -25,7 +26,7 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public void setRoom(int roomNumber, RoomType roomType, int rate) {
         Room room = roomRepository.findRoomByNumber(roomNumber);
-        if(room != null) {
+        if (room != null) {
             room.setRoomNumber(roomNumber);
             // TODO: check for room type correctness
             room.setType(roomType);
@@ -33,13 +34,12 @@ public class BookingServiceImpl implements BookingService {
 
             // save the updated room in the arraylist
             roomRepository.updateRoom(roomNumber, room);
-        }
-        else {
+        } else {
             // if the room doesn't exist we create it
-            Room newRoom = new Room(roomNumber, roomType, rate); //TODO: handle Exception when the type is not correct
+            Room newRoom = new Room(roomNumber, roomType, rate); // TODO: handle Exception when the type is not correct
 
             // update room list
-            roomRepository.createRoom(newRoom); 
+            roomRepository.createRoom(newRoom);
         }
     }
 
@@ -48,24 +48,36 @@ public class BookingServiceImpl implements BookingService {
         User user = userRepository.retrieveUser(userId);
         Room room = roomRepository.findRoomByNumber(roomNumber);
 
-        if(Booking.stayDuration(checkIn, checkOut) < 0) {
+        if (Booking.stayDuration(checkIn, checkOut) < 0) {
             System.out.println("Check out date can't be greater than checkin date");
         }
 
-        else if(room.getRate() * Booking.stayDuration(checkIn, checkOut) > user.getBalance()) {
-            //TODO: custom Exception 
+        else if (room.getRate() * Booking.stayDuration(checkIn, checkOut) > user.getBalance()) {
+            // TODO: custom Exception
             System.out.println("User doesn't have enough balance to book the room for such period");
-            // throw new RuntimeException("User doesn't have enough balance to book the room for such period");
-        } 
-        else {
-            Booking newBooking = new Booking(user, room, checkIn, checkOut);
-            // update user balance after room is booked
-            int index = userRepository.getObjectIndex(userId);
-            user.setBalance(user.getBalance() - room.getRate() * Booking.stayDuration(checkIn, checkOut));
-            // update the arrayList with the new user
-            userRepository.updateUser(index, user);
+            // throw new RuntimeException("User doesn't have enough balance to book the room
+            // for such period");
+        } else {
+            // Check for availability
+            if (room.getIsAvailable()) {
 
-            bookingRepository.createBooking(newBooking); 
+                Booking newBooking = new Booking(user, room, checkIn, checkOut);
+                // update user balance after room is booked
+                int index = userRepository.getObjectIndex(userId);
+                user.setBalance(user.getBalance() - room.getRate() * Booking.stayDuration(checkIn, checkOut));
+                // update the arrayList with the new user
+                userRepository.updateUser(index, user);
+
+                bookingRepository.createBooking(newBooking);
+
+                // Room is no longer available
+                room.setIsAvailable(false);
+                // save the updated room
+                roomRepository.updateRoom(roomRepository.getRoomIndex(roomNumber), room);
+
+            } else {
+                System.err.println("Requested Room is not available");
+            }
         }
     }
 
@@ -78,11 +90,10 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public void setUser(int userId, int balance) {
         User user = userRepository.retrieveUser(userId);
-        if(user != null) {
+        if (user != null) {
             user.setBalance(balance);
             userRepository.updateUser(userId, user);
-        } 
-        else {
+        } else {
             // Create the user if not found
             User newUser = new User(userId, null, null, balance);
             userRepository.createUser(newUser);
@@ -94,5 +105,5 @@ public class BookingServiceImpl implements BookingService {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'printAllUser'");
     }
-    
+
 }

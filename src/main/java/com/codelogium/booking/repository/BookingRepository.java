@@ -1,6 +1,7 @@
 package com.codelogium.booking.repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.codelogium.booking.entity.Booking;
 
@@ -31,6 +32,10 @@ public class BookingRepository {
             if(datastore.get(i).getBookingNumber().equals(bookingNumber)) return i;
         }
         return -1;
+    }
+
+    public List<Booking> findAllBookings() {
+        return datastore;
     }
 
     private Booking findBooking(String bookingNumber) {

@@ -1,6 +1,7 @@
 package com.codelogium.booking.service;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import com.codelogium.booking.constants.RoomType;
@@ -55,7 +56,7 @@ public class BookingServiceImpl implements BookingService {
 
         else if (room.getRate() * Booking.stayDuration(checkIn, checkOut) > user.getBalance()) {
             // TODO: custom Exception
-            System.out.println("User doesn't have enough balance to book the room for such period");
+            System.out.println("User " + userId +" doesn't have enough balance to book the room for such period");
             // throw new RuntimeException("User doesn't have enough balance to book the room
             // for such period");
         } else {
@@ -75,6 +76,7 @@ public class BookingServiceImpl implements BookingService {
                 room.setIsAvailable(false);
                 // save the updated room
                 roomRepository.updateRoom(roomRepository.getRoomIndex(roomNumber), room);
+                System.out.println(room.getId() + " is successfully booked by " + user.getFullName() + " for " + newBooking.getDuration() + " night(s)");
 
             } else {
                 System.err.println("Requested Room is not available");
@@ -157,6 +159,77 @@ public class BookingServiceImpl implements BookingService {
     public void printAll() {
         // Print existing room
         printRooms(roomRepository.findAll());
+        // Print existing bookings
+        printBookings(bookingRepository.findAllBookings());
+    }
+
+    private void printBookings(List<Booking> bookings) {
+        if (!bookings.isEmpty()) {
+            System.out.printf("%36s", "\n\nALL REGISTERED ROOMS\n");
+            // Print top border
+            for (int i = bookings.size() - 1; i >= 0; i--) {
+                System.out.print("+--------------------------------");
+            }
+            System.out.println("+");
+
+            // Print headers
+            for (int i = bookings.size() - 1; i >= 0; i--) {
+                System.out.printf("| %-30s ", "Booking " + (i + 1));
+            }
+            System.out.println("|");
+
+            // Print separator
+            for (int i = bookings.size() - 1; i >= 0; i--) {
+                System.out.print("+--------------------------------");
+            }
+            System.out.println("+");
+
+            // Print Booking Number row
+            for (Booking booking : bookings) {
+                System.out.printf("| %-30s ", "- Number : " + booking.getBookingNumber());
+            }
+            System.out.println("|");
+
+            // Print User row
+            for (Booking booking : bookings) {
+                System.out.printf("| %-30s ", "- User : " + booking.getUser().getFullName());
+            }
+            System.out.println("|");
+
+            // Print Room row
+            for (Booking booking : bookings) {
+                System.out.printf("| %-30s ", "- Room : " + booking.getRoom().getId());
+            }
+            System.out.println("|");
+
+            // Print Check-in row
+            for (Booking booking : bookings) {
+                System.out.printf("| %-30s ",
+                        "- Check-in : " + booking.getCheckIn().format(DateTimeFormatter.ofPattern("dd/MM/yyy")));
+            }
+            System.out.println("|");
+
+            // Print Check-out row
+            for (Booking booking : bookings) {
+                System.out.printf("| %-30s ",
+                        "- Check-out : " + booking.getCheckOut().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            }
+            System.out.println("|");
+
+            // Print Duration row
+            for (Booking booking : bookings) {
+                System.out.printf("| %-30s ", "- Duration : " + booking.getDuration() + " night(s)");
+            }
+            System.out.println("|");
+
+            // Print bottom border
+            for (int i = bookings.size() - 1; i >= 0; i--) {
+                System.out.print("+--------------------------------");
+            }
+            System.out.println("+");
+        } else {
+            System.out.println("No bookings available.");
+        }
     }
 
     private void printRooms(List<Room> rooms) {

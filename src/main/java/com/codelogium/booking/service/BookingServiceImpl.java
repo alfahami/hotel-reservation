@@ -117,7 +117,7 @@ public class BookingServiceImpl implements BookingService {
             System.out.println("+");
             
             // Print headers
-            for (int i = 0; i < rooms.size(); i++) {
+            for (int i = rooms.size() - 1; i >= 0 ; i--) {
                 System.out.printf("| %-22s ", rooms.get(i).getId());
             }
             System.out.println("|");
@@ -129,7 +129,7 @@ public class BookingServiceImpl implements BookingService {
             System.out.println("+");
             
             // Print ID row
-            for (int i = 0; i < rooms.size(); i++) {
+            for (int i = rooms.size() - 1; i >= 0 ; i--) {
                 System.out.printf("| %-22s ", "- ID : " + (i + 1));
             }
             System.out.println("|");
@@ -141,14 +141,14 @@ public class BookingServiceImpl implements BookingService {
             System.out.println("|");
             
             // Print Price row
-            for (Room room : rooms) {
-                System.out.printf("| %-22s ", "- Price/night : " + room.getRate());
+            for (int i = rooms.size() - 1; i >= 0 ; i--) {
+                System.out.printf("| %-22s ", "- Price/night : " + rooms.get(i).getRate());
             }
             System.out.println("|");
 
             // Print Availabilty row
-            for (Room room : rooms) {
-                System.out.printf("| %-22s ", "- Availability : " + ((room.getIsAvailable() == true) ? "Yes" : "No"));
+            for (int i = rooms.size() - 1; i >= 0 ; i--) {
+                System.out.printf("| %-22s ", "- Availability : " + ((rooms.get(i).getIsAvailable() == true) ? "Yes" : "No"));
             }
             System.out.println("|");
             

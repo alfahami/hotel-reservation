@@ -16,8 +16,15 @@ public class UserRepository {
         return new User(findUser(id));
     }
 
-    public User updateUser(int userId, User updatedUser) {
-        return this.datastore.set(this.datastore.indexOf(findUser(userId)), updatedUser);
+    public User updateUser(int index, User updatedUser) {
+        return this.datastore.set(index, updatedUser);
+    }
+
+    public int getObjectIndex(int id) {
+        for (int i = 0; i < this.datastore.size(); i++) {
+            if(datastore.get(i).getId() == id) return i;
+        }
+        return -1;
     }
 
     private User findUser(int id) {

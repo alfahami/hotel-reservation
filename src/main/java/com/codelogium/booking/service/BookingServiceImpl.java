@@ -59,6 +59,12 @@ public class BookingServiceImpl implements BookingService {
         } 
         else {
             Booking newBooking = new Booking(user, room, checkIn, checkOut);
+            // update user balance after room is booked
+            int index = userRepository.getObjectIndex(userId);
+            user.setBalance(user.getBalance() - room.getRate() * Booking.stayDuration(checkIn, checkOut));
+            // update the arrayList with the new user
+            userRepository.updateUser(index, user);
+
             bookingRepository.createBooking(newBooking); 
         }
     }

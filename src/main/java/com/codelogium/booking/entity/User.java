@@ -1,4 +1,5 @@
 package com.codelogium.booking.entity;
+import java.util.Objects;
 
 public class User {
     int id;
@@ -52,4 +53,21 @@ public class User {
     public void setBalance(int balance) {
         this.balance = balance;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof User)) {
+            return false;
+        }
+        User user = (User) o;
+        return id == user.id && Objects.equals(fullName, user.fullName) && Objects.equals(passportNumber, user.passportNumber) && balance == user.balance;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, fullName, passportNumber, balance);
+    }
+    
 }

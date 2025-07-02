@@ -1,6 +1,7 @@
 package com.codelogium.booking.repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.codelogium.booking.entity.Room;
 
@@ -19,6 +20,10 @@ public class RoomRepository {
     // Update the room based on its room number
     public Room updateRoom(int index, Room updatedRoom) {
        return  datastore.set(index, updatedRoom); 
+    }
+
+    public List<Room> findAll() {
+        return datastore;
     }
 
     public Boolean removeRoom(String id) {

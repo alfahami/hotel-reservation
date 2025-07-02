@@ -1,6 +1,7 @@
 package com.codelogium.booking.service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.codelogium.booking.constants.RoomType;
 import com.codelogium.booking.entity.Booking;
@@ -82,12 +83,6 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public void printAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'printAll'");
-    }
-
-    @Override
     public void setUser(int userId, int balance) {
         User user = userRepository.retrieveUser(userId);
         if (user != null) {
@@ -104,6 +99,67 @@ public class BookingServiceImpl implements BookingService {
     public void printAllUser() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'printAllUser'");
+    }
+
+     @Override
+    public void printAll() {
+        // Print existing room
+        printRooms(roomRepository.findAll());
+    }
+
+    private void printRooms(List<Room> rooms) {
+        if (!rooms.isEmpty()) {
+            System.out.printf("%36s", "\n\nALL REGISTERED ROOMS\n");
+            // Print top border
+            for (int i = 0; i < rooms.size(); i++) {
+                System.out.print("+------------------------");
+            }
+            System.out.println("+");
+            
+            // Print headers
+            for (int i = 0; i < rooms.size(); i++) {
+                System.out.printf("| %-22s ", rooms.get(i).getId());
+            }
+            System.out.println("|");
+            
+            // Print separator
+            for (int i = 0; i < rooms.size(); i++) {
+                System.out.print("+------------------------");
+            }
+            System.out.println("+");
+            
+            // Print ID row
+            for (int i = 0; i < rooms.size(); i++) {
+                System.out.printf("| %-22s ", "- ID : " + (i + 1));
+            }
+            System.out.println("|");
+            
+            // Print Type row
+            for (Room room : rooms) {
+                System.out.printf("| %-22s ", "- Type : " + room.getType());
+            }
+            System.out.println("|");
+            
+            // Print Price row
+            for (Room room : rooms) {
+                System.out.printf("| %-22s ", "- Price/night : " + room.getRate());
+            }
+            System.out.println("|");
+
+            // Print Availabilty row
+            for (Room room : rooms) {
+                System.out.printf("| %-22s ", "- Availability : " + ((room.getIsAvailable() == true) ? "Yes" : "No"));
+            }
+            System.out.println("|");
+            
+            // Print bottom border
+            for (int i = 0; i < rooms.size(); i++) {
+                System.out.print("+------------------------");
+            }
+            System.out.println("+\n\n");
+        } else {
+            System.out.println("No rooms available.");
+        }
     }
 
 }

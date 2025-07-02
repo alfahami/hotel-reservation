@@ -7,6 +7,7 @@ public class Room {
     int roomNumber;
     RoomType type;
     int rate;
+    private boolean isAvailable = true;
 
 
     public Room(int roomNumber, RoomType type, int rate) {
@@ -22,6 +23,7 @@ public class Room {
         this.roomNumber = source.getRoomNumber();
         this.type = source.getType();
         this.rate = source.getRate();
+        this.isAvailable = source.getIsAvailable();
     }
 
     public String getId() {
@@ -56,4 +58,17 @@ public class Room {
     public void setRate(int rate) {
         this.rate = rate;
     }
+
+    public Boolean isIsAvailable() {
+        return this.isAvailable;
+    }
+
+    public Boolean getIsAvailable() {
+        return this.isAvailable;
+    }
+
+    public void setIsAvailable(Boolean isAvailable) {
+        this.isAvailable = isAvailable;
+    }
+
 }

@@ -97,11 +97,63 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public void printAllUser() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'printAllUser'");
+        List<User> users = userRepository.findAllUser();
+        if (!users.isEmpty()) {
+            System.out.printf("%36s", "\n\nALL REGISTERED USERS\n");
+            // Print top border
+            for (int i = users.size() - 1; i >= 0; i--) {
+                System.out.print("+------------------------");
+            }
+            System.out.println("+");
+
+            // Print headers
+            for (int i = users.size() - 1; i >= 0; i--) {
+                System.out.printf("| %-22s ", "User " + (i + 1));
+            }
+            System.out.println("|");
+
+            // Print separator
+            for (int i = users.size() - 1; i >= 0; i--) {
+                System.out.print("+------------------------");
+            }
+            System.out.println("+");
+
+            // Print ID row
+            for (User user : users) {
+                System.out.printf("| %-22s ", "- ID : " + user.getId());
+            }
+            System.out.println("|");
+
+            // Print Full Name row
+            for (User user : users) {
+                System.out.printf("| %-22s ", "- Name : " + user.getFullName());
+            }
+            System.out.println("|");
+
+            // Print Passport row
+            for (User user : users) {
+                System.out.printf("| %-22s ", "- Passport : " + user.getPassportNumber());
+            }
+            System.out.println("|");
+
+            // Print Balance row
+            for (User user : users) {
+                System.out.printf("| %-22s ", "- Balance : $" + user.getBalance());
+            }
+            System.out.println("|");
+
+            // Print bottom border
+            for (int i = users.size() - 1; i >= 0; i--) {
+                System.out.print("+------------------------");
+            }
+            System.out.println("+\n\n");
+        } else {
+            System.out.println("No users available.");
+        }
+
     }
 
-     @Override
+    @Override
     public void printAll() {
         // Print existing room
         printRooms(roomRepository.findAll());
@@ -115,43 +167,44 @@ public class BookingServiceImpl implements BookingService {
                 System.out.print("+------------------------");
             }
             System.out.println("+");
-            
+
             // Print headers
-            for (int i = rooms.size() - 1; i >= 0 ; i--) {
+            for (int i = rooms.size() - 1; i >= 0; i--) {
                 System.out.printf("| %-22s ", rooms.get(i).getId());
             }
             System.out.println("|");
-            
+
             // Print separator
             for (int i = 0; i < rooms.size(); i++) {
                 System.out.print("+------------------------");
             }
             System.out.println("+");
-            
+
             // Print ID row
-            for (int i = rooms.size() - 1; i >= 0 ; i--) {
+            for (int i = rooms.size() - 1; i >= 0; i--) {
                 System.out.printf("| %-22s ", "- ID : " + (i + 1));
             }
             System.out.println("|");
-            
+
             // Print Type row
             for (Room room : rooms) {
                 System.out.printf("| %-22s ", "- Type : " + room.getType());
             }
             System.out.println("|");
-            
+
             // Print Price row
-            for (int i = rooms.size() - 1; i >= 0 ; i--) {
+            for (int i = rooms.size() - 1; i >= 0; i--) {
                 System.out.printf("| %-22s ", "- Price/night : " + rooms.get(i).getRate());
             }
             System.out.println("|");
 
             // Print Availabilty row
-            for (int i = rooms.size() - 1; i >= 0 ; i--) {
-                System.out.printf("| %-22s ", "- Availability : " + ((rooms.get(i).getIsAvailable() == true) ? "Yes" : "No"));
+            for (int i = rooms.size() - 1; i >= 0; i--) {
+                System.out.printf("| %-22s ",
+                        "- Availability : " + ((rooms.get(i).getIsAvailable() == true) ? "Yes" : "No"));
             }
             System.out.println("|");
-            
+
             // Print bottom border
             for (int i = 0; i < rooms.size(); i++) {
                 System.out.print("+------------------------");

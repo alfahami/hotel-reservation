@@ -9,8 +9,8 @@ public class BookingRepository {
     private ArrayList<Booking> datastore = new ArrayList<>();
 
     public Boolean createBooking(Booking booking) {
-        booking.setBookingNumber("Booking" + this.datastore.size()+ 1);
-        return this.datastore.add(booking);
+        booking.setBookingNumber("Booking" + datastore.size()+ 1);
+        return datastore.add(booking);
     }
 
     public Booking retrieveBooking(String bookingNumber) {
@@ -19,11 +19,18 @@ public class BookingRepository {
 
     public Booking updateBooking(String bookingNumber, Booking booking) {
         Booking retrievedBooking = findBooking(bookingNumber);
-        return this.datastore.set(datastore.indexOf(retrievedBooking), booking);
+        return datastore.set(datastore.indexOf(retrievedBooking), booking);
     }
 
     public Boolean removeBooking(String bookingNumber) {
-        return this.datastore.remove(findBooking(bookingNumber));
+        return datastore.remove(findBooking(bookingNumber));
+    }
+
+    public int getBookingIndex(String bookingNumber) {
+        for (int i = 0; i < datastore.size(); i++) {
+            if(datastore.get(i).getBookingNumber().equals(bookingNumber)) return i;
+        }
+        return -1;
     }
 
     private Booking findBooking(String bookingNumber) {

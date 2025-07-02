@@ -17,13 +17,19 @@ public class RoomRepository {
     }
 
     // Update the room based on its room number
-    public Room updateRoom(int roomNumber, Room updatedRoom) {
-        Room room = findRoomByNumber(roomNumber);
-       return  datastore.set(datastore.indexOf(room), updatedRoom); 
+    public Room updateRoom(int index, Room updatedRoom) {
+       return  datastore.set(index, updatedRoom); 
     }
 
     public Boolean removeRoom(String id) {
         return datastore.remove(findRoomById(id));
+    }
+
+    public int getRoomIndex(int roomNumber) {
+        for (int i = 0; i < datastore.size(); i++) {
+            if(datastore.get(i).getRoomNumber() == roomNumber) return i;
+        }
+        return -1; // TODO: custom exception
     }
 
     private Room findRoomById(String id) {

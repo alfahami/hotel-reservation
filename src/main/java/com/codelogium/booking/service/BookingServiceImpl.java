@@ -48,8 +48,19 @@ public class BookingServiceImpl implements BookingService {
         User user = userRepository.retrieveUser(userId);
         Room room = roomRepository.findRoomByNumber(roomNumber);
 
-        Booking newBooking = new Booking(user, room, checkIn, checkOut);
-        bookingRepository.createBooking(newBooking); 
+        if(Booking.stayDuration(checkIn, checkOut) < 0) {
+            System.out.println("Check out date can't be greater than checkin date");
+        }
+
+        else if(room.getRate() * Booking.stayDuration(checkIn, checkOut) > user.getBalance()) {
+            //TODO: custom Exception 
+            System.out.println("User doesn't have enough balance to book the room for such period");
+            // throw new RuntimeException("User doesn't have enough balance to book the room for such period");
+        } 
+        else {
+            Booking newBooking = new Booking(user, room, checkIn, checkOut);
+            bookingRepository.createBooking(newBooking); 
+        }
     }
 
     @Override

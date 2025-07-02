@@ -29,6 +29,8 @@ public class App
          bookingService.setRoom(2, RoomType.JUNIOR, 2000);
          bookingService.setRoom(3, RoomType.SUITE, 3000);
 
+         bookingService.printAll();
+
          // Create 3 user
          User user1 = new User(1, "John Doe", "NBE111", 5000);
          User user2 = new User(2, "Jane Doe", "NBE222", 10000);
@@ -56,6 +58,8 @@ public class App
 
          // SetRoom(1, suite, 10000)
          bookingService.setRoom(1, RoomType.SUITE, 10000);
+
+         bookingService.printAll();
 
     }
 

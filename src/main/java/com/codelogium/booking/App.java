@@ -38,8 +38,11 @@ public class App
          userRepository.createUser(user2);
          userRepository.createUser(user3);
 
-         // Booking
+         // User 1 books Room 2 from 30/06/2026 to 07/07/2026
          bookingService.bookRoom(1, 2, LocalDate.parse("2026-06-30"), LocalDate.parse("2026-07-07"));
+
+         // User 1 tries booking room 2 from 30/06/2026 to 07/07/2026
+         bookingService.bookRoom(1, 2, LocalDate.parse("2026-07-07"), LocalDate.parse("2026-06-30"));
 
     }
 

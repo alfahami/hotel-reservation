@@ -39,6 +39,8 @@ public class App {
 
         bookingService.printAllUser();
 
+        System.out.println("===============================================================\n");
+
         // User 1 books Room 2 from 30/06/2026 to 07/07/2026
         System.out.println("User 1 tries to book Room 2 from 30/06/2026 to 07/07/2026: ");
         bookingService.bookRoom(1, 2, LocalDate.parse("2026-06-30"), LocalDate.parse("2026-07-07"));
@@ -62,6 +64,8 @@ public class App {
         System.out.println("\nUser 2 tries booking room 1 from 07/07/2026 to 30/06/2026: ");
 
         bookingService.bookRoom(2, 3, LocalDate.parse("2026-07-07"), LocalDate.parse("2026-07-08"));
+
+        System.out.println("\n===============================================================\n");
 
         // SetRoom(1, suite, 10000)
         bookingService.setRoom(1, RoomType.SUITE, 10000);

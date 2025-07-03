@@ -52,12 +52,13 @@ public class BookingServiceImpl implements BookingService {
         Room room = roomRepository.findRoomByNumber(roomNumber);
 
         if (Booking.stayDuration(checkIn, checkOut) < 0) {
-            System.out.println("Check out date can't be greater than checkin date");
+            System.out.println("Error: Check out date can't be greater than checkin date");
         }
 
         else if (room.getRate() * Booking.stayDuration(checkIn, checkOut) > user.getBalance()) {
             // TODO: custom Exception
-            System.out.println("User " + userId +" doesn't have enough balance to book the room for such period");
+            System.out
+                    .println("Error: User " + userId + " doesn't have enough balance to book the room for such period");
             // throw new RuntimeException("User doesn't have enough balance to book the room
             // for such period");
         } else {
@@ -77,10 +78,11 @@ public class BookingServiceImpl implements BookingService {
                 room.setIsAvailable(false);
                 // save the updated room
                 roomRepository.updateRoom(roomRepository.getRoomIndex(roomNumber), room);
-                System.out.println(room.getId() + " is successfully booked by " + user.getFullName() + " for " + newBooking.getDuration() + " night(s)");
+                System.out.println("Log: " + room.getId() + " is successfully booked by " + user.getFullName() + " for "
+                        + newBooking.getDuration() + " night(s)");
 
             } else {
-                System.err.println("Requested Room is not available");
+                System.err.println("Error: Requested Room is not available");
             }
         }
     }
@@ -102,7 +104,7 @@ public class BookingServiceImpl implements BookingService {
     public void printAllUser() {
         List<User> users = userRepository.findAllUser();
         if (!users.isEmpty()) {
-            System.out.printf("%36s", "\n\nALL REGISTERED USERS\n");
+            System.out.printf("%49s", "ALL REGISTERED USERS\n");
             // Print top border
             for (int i = users.size() - 1; i >= 0; i--) {
                 System.out.print("+------------------------");
@@ -151,7 +153,7 @@ public class BookingServiceImpl implements BookingService {
             }
             System.out.println("+\n\n");
         } else {
-            System.out.println("No users available.");
+            System.out.println("No users available.\n");
         }
 
     }
@@ -166,7 +168,7 @@ public class BookingServiceImpl implements BookingService {
 
     private void printBookings(List<Booking> bookings) {
         if (!bookings.isEmpty()) {
-            System.out.printf("%36s", "\n\nEXISTING BOOKINGS\n");
+            System.out.printf("%42s", "EXISTING BOOKINGS\n");
             // Print top border
             for (int i = bookings.size() - 1; i >= 0; i--) {
                 System.out.print("+--------------------------------");
@@ -227,15 +229,15 @@ public class BookingServiceImpl implements BookingService {
             for (int i = bookings.size() - 1; i >= 0; i--) {
                 System.out.print("+--------------------------------");
             }
-            System.out.println("+");
+            System.out.println("+\n\n");
         } else {
-            System.out.println("No bookings available.");
+            System.out.println("No bookings available yet.\n");
         }
     }
 
     private void printRooms(List<Room> rooms) {
         if (!rooms.isEmpty()) {
-            System.out.printf("%36s", "\n\nALL REGISTERED ROOMS\n");
+            System.out.printf("%49s", "ALL REGISTERED ROOMS\n");
             // Print top border
             for (int i = 0; i < rooms.size(); i++) {
                 System.out.print("+------------------------");

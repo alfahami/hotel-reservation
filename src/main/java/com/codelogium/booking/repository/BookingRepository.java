@@ -6,11 +6,11 @@ import java.util.List;
 import com.codelogium.booking.entity.Booking;
 
 public class BookingRepository {
-    
+
     private ArrayList<Booking> datastore = new ArrayList<>();
 
     public Boolean createBooking(Booking booking) {
-        booking.setBookingNumber("Booking" + datastore.size()+ 1);
+        booking.setBookingNumber("Booking" + datastore.size() + 1);
         return datastore.add(booking);
     }
 
@@ -29,7 +29,8 @@ public class BookingRepository {
 
     public int getBookingIndex(String bookingNumber) {
         for (int i = 0; i < datastore.size(); i++) {
-            if(datastore.get(i).getBookingNumber().equals(bookingNumber)) return i;
+            if (datastore.get(i).getBookingNumber().equals(bookingNumber))
+                return i;
         }
         return -1;
     }
@@ -40,9 +41,10 @@ public class BookingRepository {
 
     private Booking findBooking(String bookingNumber) {
         for (Booking booking : datastore) {
-            if(booking.getBookingNumber().equals(bookingNumber)) return new Booking(booking);
+            if (booking.getBookingNumber().equals(bookingNumber))
+                return new Booking(booking);
         }
 
-        return null; //TODO: custom Exception
+        return null; // TODO: custom Exception
     }
 }

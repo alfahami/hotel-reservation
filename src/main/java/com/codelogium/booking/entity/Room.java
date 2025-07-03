@@ -9,7 +9,6 @@ public class Room {
     int rate;
     private boolean isAvailable = true;
 
-
     public Room(int roomNumber, RoomType type, int rate) {
         this.id = "Room " + roomNumber;
         this.roomNumber = roomNumber;
@@ -33,7 +32,6 @@ public class Room {
     public void setId(String id) {
         this.id = id;
     }
-
 
     public int getRoomNumber() {
         return this.roomNumber;

@@ -11,13 +11,12 @@ public class Booking {
     LocalDate checkOut;
     int duration; // to be automatically calculated
 
-
     public Booking(User user, Room room, LocalDate checkIn, LocalDate checkOut) {
         this.user = user;
         this.room = room;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
-        setDuration(duration); // implicity calling stayDuration in order to get the number of nights   
+        setDuration(duration); // implicity calling stayDuration in order to get the number of nights
     }
 
     public Booking(Booking source) {
@@ -26,7 +25,7 @@ public class Booking {
         this.room = source.getRoom();
         this.checkIn = source.getCheckIn();
         this.checkOut = source.getCheckOut();
-        this.duration = source.getDuration(); // implicity calling stayDuration in order to get the number of nights   
+        this.duration = source.getDuration(); // implicity calling stayDuration in order to get the number of nights
     }
 
     public String getBookingNumber() {

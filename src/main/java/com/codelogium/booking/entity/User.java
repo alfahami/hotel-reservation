@@ -1,4 +1,5 @@
 package com.codelogium.booking.entity;
+
 import java.util.Objects;
 
 public class User {
@@ -62,12 +63,13 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return id == user.id && Objects.equals(fullName, user.fullName) && Objects.equals(passportNumber, user.passportNumber) && balance == user.balance;
+        return id == user.id && Objects.equals(fullName, user.fullName)
+                && Objects.equals(passportNumber, user.passportNumber) && balance == user.balance;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, fullName, passportNumber, balance);
     }
-    
+
 }

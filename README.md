@@ -13,7 +13,7 @@ Note that the application was built using the Maven tool to allow for easy exten
 
 1. **Suppose we put all the functions inside the same service. Is this the recommended approach?**
 
-   * Even though this is the approach followed in this application, it is not recommended, as it mixes business services by **tightly coupling them, making the codebase harder to maintain**. It also violates the **Single Responsibility Principle (SRP)** — a core concept of clean software architecture — which could negatively impact the application as more business services are added<br>.
+   * Even though this is the approach followed in this application, it is not recommended, as it mixes business services by **tightly coupling them, making the codebase harder to maintain**. It also violates the **Single Responsibility Principle (SRP)**, a core concept of clean software architecture, which could negatively impact the application as more business services are added<br>.
 
 2. **In this design, we chose to have a function `setRoom(..)` that should not impact previous bookings. What is another way?**
 
@@ -88,7 +88,7 @@ Make sure you have **Java (JDK 8+)** and **Maven** installed.
    ```bash
    mvn -q exec:java -Dexec.mainClass="com.codelogium.booking.App"
    ```
- If `exec-maven-plugin` is not configured yet, you can add it under `plugins` in your `pom.xml`. Let me know if you need help setting that up.
+ If `exec-maven-plugin` is not configured yet, you can add it under `plugins` in your `pom.xml`.
 
 ---
 

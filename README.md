@@ -102,13 +102,13 @@ Make sure you have **Java (JDK 8+)** and **Maven** installed.
 
 ## Screenshots
 1. After registering 3 users and 3 rooms
-![User and Rooms registration](images/image1.png)
+![User and Rooms registration](screenshots/image1.png)
 
 2. Attempts bookings (some failed, some succeeded)
-![Attempts booking](images/image2.png)
+![Attempts booking](screenshots/image2.png)
 
 1. Updated bookings, rooms, users after successful bookings
-![Updated rooms, users, infos after bookings](images/image3.png)
+![Updated rooms, users, infos after bookings](screenshots/image3.png)
 
 ## Future Scope
 

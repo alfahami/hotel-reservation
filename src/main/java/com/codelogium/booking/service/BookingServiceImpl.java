@@ -28,6 +28,7 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public void setRoom(int roomNumber, RoomType roomType, int rate) {
         Room room = roomRepository.findRoomByNumber(roomNumber);
+        int index = roomRepository.getRoomIndex(roomNumber);
         if (room != null) {
             room.setRoomNumber(roomNumber);
             // TODO: check for room type correctness
@@ -35,7 +36,7 @@ public class BookingServiceImpl implements BookingService {
             room.setRate(rate);
 
             // save the updated room in the arraylist
-            roomRepository.updateRoom(roomNumber, room);
+            roomRepository.updateRoom(index, room);
         } else {
             // if the room doesn't exist we create it
             Room newRoom = new Room(roomNumber, roomType, rate); // TODO: handle Exception when the type is not correct
@@ -165,7 +166,7 @@ public class BookingServiceImpl implements BookingService {
 
     private void printBookings(List<Booking> bookings) {
         if (!bookings.isEmpty()) {
-            System.out.printf("%36s", "\n\nALL REGISTERED ROOMS\n");
+            System.out.printf("%36s", "\n\nEXISTING BOOKINGS\n");
             // Print top border
             for (int i = bookings.size() - 1; i >= 0; i--) {
                 System.out.print("+--------------------------------");
@@ -260,8 +261,8 @@ public class BookingServiceImpl implements BookingService {
             System.out.println("|");
 
             // Print Type row
-            for (Room room : rooms) {
-                System.out.printf("| %-22s ", "- Type : " + room.getType());
+            for (int i = rooms.size() - 1; i >= 0; i--) {
+                System.out.printf("| %-22s ", "- Type : " + rooms.get(i).getType());
             }
             System.out.println("|");
 

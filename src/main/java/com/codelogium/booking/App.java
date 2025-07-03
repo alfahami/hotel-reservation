@@ -26,7 +26,7 @@ public class App {
         bookingService.setRoom(2, RoomType.JUNIOR, 2000);
         bookingService.setRoom(3, RoomType.SUITE, 3000);
 
-        // bookingService.printAll();
+        bookingService.printAll();
 
         // Create 3 user
         User user1 = new User(1, "John Doe", "NBE111", 5000);
@@ -37,7 +37,7 @@ public class App {
         userRepository.createUser(user2);
         userRepository.createUser(user3);
 
-        // bookingService.printAllUser();
+        bookingService.printAllUser();
 
         // User 1 books Room 2 from 30/06/2026 to 07/07/2026
         System.out.println("User 1 tries to book Room 2 from 30/06/2026 to 07/07/2026: ");
